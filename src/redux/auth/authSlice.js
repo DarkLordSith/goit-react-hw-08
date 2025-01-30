@@ -3,7 +3,7 @@ import { register, login, logout, refreshUser } from "./operations";
 
 const initialState = {
   user: { name: null, email: null },
-  token: null,
+  token: localStorage.getItem("token") || null, // При загрузке берем токен из localStorage
   isLoggedIn: false,
   isRefreshing: false,
 };
@@ -42,4 +42,4 @@ const authSlice = createSlice({
   },
 });
 
-export default authSlice.reducer;
+export const authReducer = authSlice.reducer;
