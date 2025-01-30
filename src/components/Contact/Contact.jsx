@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { HiUser } from "react-icons/hi";
 import { HiPhone } from "react-icons/hi";
 import { useDispatch } from "react-redux"; // Додано
-import { deleteContact } from "../../redux/contactsOps"; // Імпорт операції
+import { deleteContact } from "../../redux/contacts/operations"; // Імпорт операції
 import styles from "./Contact.module.css";
 
 const Contact = ({ id, name, number }) => {

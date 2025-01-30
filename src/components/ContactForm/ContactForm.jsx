@@ -1,22 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addContact } from "../../redux/contactsOps";
+import { addContact } from "../../redux/contacts/operations";
 import { useState } from "react";
 import styles from "./ContactForm.module.css";
 
 const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector((state) => state.contacts.items);
+
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const contacts = useSelector((state) => state.contacts.items);
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (contacts.some((contact) => contact.name === name)) {
-      alert(`${name} вже є у списку контактів.`);
+      alert(`${name} is already in contacts.`);
       return;
     }
-
     dispatch(addContact({ name, number }));
     setName("");
     setNumber("");
@@ -24,25 +23,19 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <label className={styles.label}>
-        Name:
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      <label>
-        Number:
-        <input
-          type="text"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
-        />
-      </label>
-      <button type="submit" className={styles.button}>
-        Add contact
-      </button>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+        required
+      />
+      <button type="submit">Add Contact</button>
     </form>
   );
 };
