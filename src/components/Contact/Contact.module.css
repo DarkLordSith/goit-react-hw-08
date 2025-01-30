@@ -1,0 +1,28 @@
+.contactItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 320px;
+}
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+}
+
+.contactInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+.contactIcon {
+  color: black;
+}
+.deleteButton {
+  height: fit-content;
+  padding: 5px 10px;
+  font-size: 14px;
+}
