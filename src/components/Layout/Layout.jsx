@@ -1,10 +1,10 @@
+// src/components/Layout/Layout.jsx
 import { Outlet } from "react-router-dom";
-import { AppBar } from "../AppBar/AppBar";
-import styles from "./Layout.module.css";
+import AppBar from "../AppBar/AppBar";
 
 const Layout = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <AppBar />
       <main>
         <Outlet />

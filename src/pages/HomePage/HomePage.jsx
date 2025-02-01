@@ -1,8 +1,11 @@
+import React from "react";
+import styles from "./HomePage.module.css";
+
 const HomePage = () => {
   return (
-    <div>
-      <h1>Welcome to the Contact Book App</h1>
-      <p>Please log in or register to manage your contacts.</p>
+    <div className={styles.container}>
+      <h1>Welcome to the Contact Book App!</h1>
+      <p>Manage your contacts securely and efficiently.</p>
     </div>
   );
 };

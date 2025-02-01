@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact } from "./operations";
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+  updateContact,
+} from "./operations";
+import { logout } from "../auth/operations";
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -12,28 +18,33 @@ const contactsSlice = createSlice({
     builder
       .addCase(fetchContacts.pending, (state) => {
         state.loading = true;
-        state.error = null;
-        console.log("🔄 Загрузка контактов началась...");
       })
-      .addCase(fetchContacts.fulfilled, (state, action) => {
+      .addCase(fetchContacts.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.items = action.payload;
-        console.log("✅ Контакты сохранены в store:", state.items);
+        state.items = payload;
       })
-      .addCase(fetchContacts.rejected, (state, action) => {
+      .addCase(fetchContacts.rejected, (state, { payload }) => {
         state.loading = false;
-        state.error = action.payload;
-        console.error("❌ Ошибка при загрузке контактов:", action.payload);
+        state.error = payload;
       })
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.items.push(action.payload);
+      .addCase(addContact.fulfilled, (state, { payload }) => {
+        state.items.push(payload);
       })
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        state.items = state.items.filter(
-          (contact) => contact.id !== action.payload
+      .addCase(deleteContact.fulfilled, (state, { payload }) => {
+        state.items = state.items.filter((contact) => contact.id !== payload);
+      })
+      .addCase(updateContact.fulfilled, (state, { payload }) => {
+        const index = state.items.findIndex(
+          (contact) => contact.id === payload.id
         );
+        if (index !== -1) {
+          state.items[index] = payload;
+        }
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.items = [];
       });
   },
 });
 
-export const contactsReducer = contactsSlice.reducer; // ✅ Исправлено
+export const contactsReducer = contactsSlice.reducer;
