@@ -5,9 +5,9 @@ import * as Yup from "yup";
 import { Box, TextField, Button, Typography, Paper } from "@mui/material";
 
 const validationSchema = Yup.object({
-  name: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().min(6, "Too short").required("Required"),
+  name: Yup.string().required("Required to fill"),
+  email: Yup.string().email("Invalid email").required("Required to fill"),
+  password: Yup.string().min(6, "Too short").required("Required to fill"),
 });
 
 const RegisterPage = () => {
