@@ -3,18 +3,16 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://connections-api.goit.global";
 
-// ✅ Функция для установки токена в заголовки запросов
 const setAuthToken = (token) => {
   if (token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    localStorage.setItem("token", token); // Сохраняем токен в localStorage
+    localStorage.setItem("token", token);
   } else {
     delete axios.defaults.headers.common.Authorization;
-    localStorage.removeItem("token"); // Удаляем токен при выходе
+    localStorage.removeItem("token");
   }
 };
 
-// ✅ Регистрация пользователя
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
@@ -28,7 +26,6 @@ export const register = createAsyncThunk(
   }
 );
 
-// ✅ Логин пользователя
 export const login = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
@@ -42,7 +39,6 @@ export const login = createAsyncThunk(
   }
 );
 
-// ✅ Выход из системы
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await axios.post("/users/logout");
@@ -53,17 +49,16 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   }
 });
 
-// ✅ Обновление пользователя (чтобы не разлогинивало при перезагрузке)
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    let token = state.auth.token || localStorage.getItem("token"); // Берем токен из store или localStorage
+    let token = state.auth.token || localStorage.getItem("token");
 
     if (!token) return thunkAPI.rejectWithValue("No token found");
 
     try {
-      setAuthToken(token); // Устанавливаем токен в заголовки
+      setAuthToken(token);
       const { data } = await axios.get("/users/current");
       return data;
     } catch (error) {

@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ContactsPage from "./pages/ContactsPage/ContactsPage";
+import NotFoundPage from "./pages/NotFoundPages/NotFoundPages";
 import PrivateRoute from "./routes/PrivateRoute";
 import RestrictedRoute from "./routes/RestrictedRoute";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -60,7 +61,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          <Route path="*" element={<p>Page Not Found</p>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
       <Toaster position="top-right" reverseOrder={false} />
