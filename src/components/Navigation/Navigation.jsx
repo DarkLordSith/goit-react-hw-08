@@ -1,22 +1,34 @@
 import { NavLink } from "react-router-dom";
-import styles from "./Navigation.module.css";
+import { Button, Box } from "@mui/material";
 
 const Navigation = () => {
   return (
-    <nav className={styles.nav}>
-      <NavLink
+    <Box sx={{ display: "flex", gap: 2 }}>
+      <Button
+        component={NavLink}
         to="/"
-        className={({ isActive }) => (isActive ? styles.active : styles.link)}
+        color="inherit"
+        sx={{
+          "&.active": {
+            borderBottom: "2px solid white",
+          },
+        }}
       >
         Home
-      </NavLink>
-      <NavLink
+      </Button>
+      <Button
+        component={NavLink}
         to="/contacts"
-        className={({ isActive }) => (isActive ? styles.active : styles.link)}
+        color="inherit"
+        sx={{
+          "&.active": {
+            borderBottom: "2px solid white",
+          },
+        }}
       >
         Contacts
-      </NavLink>
-    </nav>
+      </Button>
+    </Box>
   );
 };
 

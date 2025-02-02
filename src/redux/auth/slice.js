@@ -3,7 +3,7 @@ import { register, login, logout, refreshUser } from "./operations";
 
 const initialState = {
   user: { name: null, email: null },
-  token: localStorage.getItem("token") || null, // При загрузке берем токен из localStorage
+  token: null,
   isLoggedIn: false,
   isRefreshing: false,
 };
@@ -27,12 +27,14 @@ const authSlice = createSlice({
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;
+        localStorage.removeItem("persist:root");
       })
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, { payload }) => {
         state.user = payload;
+        state.token = payload.token || state.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })

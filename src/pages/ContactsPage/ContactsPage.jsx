@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchContacts } from "../../redux/contacts/operations";
 import { selectContacts } from "../../redux/contacts/selectors";
+import { Container, Typography } from "@mui/material";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import ContactList from "../../components/ContactList/ContactList";
 import SearchBox from "../../components/SearchBox/SearchBox";
@@ -11,17 +12,18 @@ const ContactsPage = () => {
   const contacts = useSelector(selectContacts);
 
   useEffect(() => {
-    console.log("📢 Запрос контактов отправлен в Redux...");
     dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Contacts</h1>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Typography variant="h4" align="center" gutterBottom>
+        Your Contacts
+      </Typography>
       <ContactForm />
       <SearchBox />
       <ContactList contacts={contacts} />
-    </div>
+    </Container>
   );
 };
 
