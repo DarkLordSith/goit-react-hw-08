@@ -11,6 +11,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -21,7 +22,18 @@ const AppBar = () => {
       sx={{ backgroundColor: "primary.main", boxShadow: 3 }}
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h6" component="div">
+        <Typography
+          variant="h6"
+          component={Link}
+          to="/"
+          sx={{
+            textDecoration: "none",
+            color: "inherit",
+            "&:hover": {
+              borderBottom: "2px solid white",
+            },
+          }}
+        >
           Contact Book
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
